@@ -1,7 +1,7 @@
 #include <mgos.h>
-#ifdef MGOS_HAVE_MJS
+/*#ifdef MGOS_HAVE_MJS
 #include <mjs.h>
-#endif
+#endif*/
 
 #include "mgos_ds3231.h"
 #include "mgos_i2c.h"
@@ -166,15 +166,21 @@ struct mgos_ds3231 {
   struct mgos_i2c *_i2c;
 };
 
-struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr) {
+struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr, uint8_t id) {
   // Is I2C enabled?
   if (!mgos_sys_config_get_i2c_enable()) {
     LOG(LL_INFO, ("I2C is disabled."));
     return NULL;
   }
 
-  struct mgos_i2c *i2c = mgos_i2c_get_global();
+  /*struct mgos_i2c *i2c = mgos_i2c_get_global();
   if (NULL == i2c) {
+    LOG(LL_INFO, ("Could not get i2c global instance"));
+    return NULL;
+  }*/
+  struct mgos_i2c *i2c = mgos_i2c_get_bus(id);
+  if(NULL == i2c)
+  {
     LOG(LL_INFO, ("Could not get i2c global instance"));
     return NULL;
   }

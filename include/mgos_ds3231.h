@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -55,6 +55,8 @@ struct mgos_ds3231_date_time {
 #ifdef MGOS_HAVE_MJS
 struct mjs_c_struct_member;
 #endif
+
+bool mgos_ds3231_init();
 
 /*
  * Create a `mgos_ds3231_date_time` structure
@@ -114,7 +116,7 @@ uint16_t mgos_ds3231_date_time_get_year(struct mgos_ds3231_date_time *dt);
 /*
  * Create a `struct mgos_ds3231` structure
  */
-struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr);
+struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr, uint8_t id);
 
 /*
  * Free a `struct mgos_ds3231` structure
